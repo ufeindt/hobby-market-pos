@@ -47,8 +47,7 @@ interface StoreConfig extends BaseRecord {
   swishNumber: string
 }
 
-interface Variant extends BaseRecord {
-  id: number
+interface Variant {
   price: number
   sku: string
   title: string
@@ -62,9 +61,9 @@ const db = new Dexie('POSDatabase') as Dexie & {
 }
 
 db.version(1).stores({
-  checkout: '++id, *discounts, *lines',
-  products: '++id, title, *variants',
-  sales: '++id, checkoutId, *discounts, *lines, paymentId',
+  checkout: '++id, discounts, lines',
+  products: '++id, title, variants',
+  sales: '++id, checkoutId, discounts, lines, paymentId',
   storeConfig: '++id, storeName, swishNumber',
 })
 
